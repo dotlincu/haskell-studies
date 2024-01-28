@@ -64,3 +64,44 @@ funcao a b c
     | a == 1 = 2*c^2 - 3*c
     | a == 2 = 3*c - b^2
     | otherwise = 0
+
+----------------------------------------------------------------------------
+-- Aula 3
+areaheron :: Float -> Float -> Float -> Float
+areaheron a b c = sqrt (s*(s-a)*(s-b)*(s-c))
+    where s = (a+b+c)/2
+
+funcao1 :: Int -> Int -> Int
+funcao1 x y 
+    | x <= 10 = x + a
+    | otherwise = x - a
+    where 
+        a = 2*y
+
+funcao2 :: Int -> Int
+funcao2 y = 3 + func y + func a + func b
+    where
+        func x = x + 7*c
+        a = 3*c
+        b = func 2
+        c = 10
+
+eq2grau :: Float -> Float -> Float -> Int
+eq2grau a b c 
+    | delta > 0 = 2
+    | delta == 0 = 1
+    | otherwise = 0
+    where
+        delta = b^2 - 4*a*c
+
+-- let x = 4+6 in x*x
+-- let x = 4+6; y = 2*x in x*y
+
+areacilindro :: Float -> Float -> Float
+areacilindro r h = let arealado = 2*pi*r*h
+                       areabase = pi*r^2
+                   in 2*areabase + arealado
+
+areaheron2 :: Float -> Float -> Float -> Float
+areaheron2 a b c = let s = (a+b+c)/2
+    in sqrt (s*(s-a)*(s-b)*(s-c))
