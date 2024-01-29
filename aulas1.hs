@@ -105,3 +105,45 @@ areacilindro r h = let arealado = 2*pi*r*h
 areaheron2 :: Float -> Float -> Float -> Float
 areaheron2 a b c = let s = (a+b+c)/2
     in sqrt (s*(s-a)*(s-b)*(s-c))
+
+----------------------------------------------------------------------------
+-- Aula 4
+divrec :: Int -> Int -> Int
+divrec a b
+    | a < b     = a
+    | a == b    = 0
+    | otherwise = divrec (a-b) b
+
+multi :: Int -> Int -> Int
+multi x n
+    | n == 0 = 0
+    | n == 1 = x
+    | otherwise = x + multi x (n-1)
+
+mdc :: Int -> Int -> Int
+mdc x y
+    | x > y = mdc (x-y) y
+    | x < y = mdc y x
+    | otherwise = x
+
+potencia2 :: Int -> Int
+potencia2 n
+    | n == 0 = 1
+    | n > 0  = 2 * potencia2 (n-1)
+
+potencia2cauda :: Int -> Int -> Int
+potencia2cauda n acumulado
+    | n == 0 = acumulado
+    | n > 0  = potencia2cauda (n-1) (2*acumulado)
+
+fatrec :: Int -> Int -> Int
+fatrec n acc
+    | n == 0 = acc
+    | n > 0  = fatrec (n-1) (n*acc)
+
+fibocauda :: Int -> Int -> Int -> Int
+fibocauda n acc1 acc2
+    | n == 0 = acc1
+    | n == 1 = acc2
+    | n > 1  = fibocauda (n-1) acc2 (acc1+acc2)
+    
