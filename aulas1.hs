@@ -5,6 +5,7 @@
 {-# HLINT ignore "Use even" #-}
 {-# HLINT ignore "Use isAsciiLower" #-}
 {-# HLINT ignore "Use isAsciiUpper" #-}
+{-# OPTIONS_GHC -Wno-overlapping-patterns #-}
 
 -- Aula 1 Introducao
 polinomio :: Int -> Int
@@ -225,6 +226,7 @@ aprovados tma nota = [ nome | (nome, media) <- tma, media >= nota]
 -- Crie a representacao de um ponto de tres dimensoes (x,y,z). 
 -- A representacao deve ser realizada por meio de uma tupla e a definicao de um novo tipo.
 type Ponto = (Float, Float, Float)
+type PontoPar = (Float, Float)
 
 -- Escreva uma funcao que calcule a distancia entre dois pontos passados como argumentos.
 distancia :: Ponto -> Ponto -> Float
@@ -236,4 +238,50 @@ distancia1 (x1, y1, z1) (x2, y2, z2) = sqrt (d1 + d2 + d3)
         d1 = (x2-x1)^2
         d2 = (y2-y1)^2
         d3 = (z2-z1)^2
+
+pontomedio :: PontoPar -> PontoPar -> PontoPar
+pontomedio (x1, y1) (x2, y2) = ((x1+x2)/2, (y1+y2)/2)
+
+quadrante :: PontoPar -> Int
+quadrante (x,y) 
+    | x > 0 && y > 0 = 1
+    | x < 0 && y > 0 = 2
+    | x < 0 && y < 0 = 3
+    | x > 0 && y < 0 = 4
+    | otherwise = 0 
+
+----------------------------------------------------------------------------
+-- Aula 6 Casamento de Padroes
+
+padroes :: Int -> String
+padroes 1 = "UM"
+padroes 2 = "DOIS"
+padroes x = "OUTRO"
+padroes _ = "OUTRO"
+
+padroes2 :: [Int] -> Int
+padroes2 [] = 0
+padroes2 (_:xs) = 1 + padroes2 xs
+
+type Tupla4 = (Int,Int,Int,Int)
+padroes3 :: Tupla4 -> String
+padroes3 (_,_,_,fourth)
+    | fourth > 10   = "Maior q 10"
+    | otherwise     = "Nao maior q 10"
+
+opp :: (Int, (Int,Int)) -> Int
+opp z = if fst z == 1
+        then fst (snd z) + snd (snd z)
+        else if fst z == 2
+            then fst (snd z) - snd (snd z)
+            else 0
+
+opp1 :: (Int, (Int,Int)) -> Int
+opp1 (1,(x,y)) = x + y
+opp1 (2,(x,y)) = x - y
+opp1 _ = 0
+
+terceiroelem :: [a] -> a
+terceiroelem (_:_:x:_) = x
+
 
