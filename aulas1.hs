@@ -50,8 +50,10 @@ maiorg a b
 
 isPar :: Int -> Bool
 isPar n
-    | n `mod` 2 == 0 = True
+    | mod n 2 == 0 = True
     | otherwise = False
+
+-- isPar n = (mod n 2 == 0)
 
 charcase :: Char -> String
 charcase c
@@ -251,7 +253,7 @@ quadrante (x,y)
     | otherwise = 0 
 
 ----------------------------------------------------------------------------
--- Aula 6 Casamento de Padroes
+-- Aula 7 Casamento de Padroes
 
 padroes :: Int -> String
 padroes 1 = "UM"
@@ -284,4 +286,51 @@ opp1 _ = 0
 terceiroelem :: [a] -> a
 terceiroelem (_:_:x:_) = x
 
+----------------------------------------------------------------------------
+-- Aula 8 Funcoes de Alta Ordem
 
+dobra :: Int -> Int 
+dobra n = n + n
+
+dobralista :: [Int] -> [Int]
+dobralista [] = []
+dobralista (x:xs) = (dobra x):(dobralista xs)
+
+mapInt :: (Int -> Int) -> [Int] -> [Int]
+mapInt _ [] = []
+mapInt f (x:xs) = (f x):(mapInt f xs)
+
+filtro :: (Int -> Bool) -> [Int] -> [Int]
+filtro f [] = []
+filtro f (x:xs)
+    | (f x) == True = x : (filtro f xs)
+    | otherwise     = filtro f xs
+
+isImpar :: Int -> Bool
+isImpar x = (mod x 2 == 1)
+
+-- filtro (\x -> mod x 2 == 1) [1,2,3]
+
+maior :: Int -> Int -> Bool
+maior a b 
+    | a > b = True
+    | otherwise = False
+
+menor :: Int -> Int -> Bool
+menor a b
+    | a < b = True
+    | otherwise = False
+
+buscalista :: (Int -> Int -> Bool) -> [Int] -> Int
+buscalista _ [] = -1
+buscalista _ (x:[]) = x
+buscalista f (x:xs) 
+    | (f x c) = x
+    | otherwise = c
+    where c = buscalista f xs
+
+qsort1 :: [Int] -> [Int]
+qsort1 [] = []
+qsort1 (x:xs) = qsort1 (filter (<= x) xs)
+                ++ [x]
+                ++ qsort1 (filter (> x) xs)
