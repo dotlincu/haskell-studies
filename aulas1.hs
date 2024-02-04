@@ -191,3 +191,23 @@ raizes a b c
     | otherwise     = [(-b - sqrt delta)/(2*a), (-b + sqrt delta)/(2*a)]
     where delta = b*b - 4*a*c 
 
+func3 :: Int -> [Int]
+func3 n = [x | x <- [1..n], mod n x == 0]
+
+multiplos :: Int -> [Int]
+multiplos n = [ n * x | x <- [1..10]]
+
+isPrimo :: Int -> Bool
+isPrimo n
+    | length [x | x <- [1..n], mod n x == 0] == 2 = True
+    | otherwise = False
+
+primos :: Int -> [Int]
+primos n = [x | x <- [1..n], isPrimo x]
+
+qsort :: [Int] -> [Int]
+qsort [] = []
+qsort (x:xs) = qsort [y | y <- xs, y <= x] 
+    ++ [x] 
+    ++ qsort [y | y <- xs, y > x]
+
