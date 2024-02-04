@@ -211,3 +211,29 @@ qsort (x:xs) = qsort [y | y <- xs, y <= x]
     ++ [x] 
     ++ qsort [y | y <- xs, y > x]
 
+----------------------------------------------------------------------------
+-- Aula 6 Tuplas
+
+type NomeAluno = String
+type NotaAluno = Int
+type Aluno = (NomeAluno, NotaAluno)
+type Turma = [Aluno]
+
+aprovados :: Turma -> Int -> [NomeAluno]
+aprovados tma nota = [ nome | (nome, media) <- tma, media >= nota]
+
+-- Crie a representacao de um ponto de tres dimensoes (x,y,z). 
+-- A representacao deve ser realizada por meio de uma tupla e a definicao de um novo tipo.
+type Ponto = (Float, Float, Float)
+
+-- Escreva uma funcao que calcule a distancia entre dois pontos passados como argumentos.
+distancia :: Ponto -> Ponto -> Float
+distancia (x1, y1, z1) (x2, y2, z2) = sqrt ((x2-x1)^2 + (y2-y1)^2 + (z2-z1)^2)
+
+distancia1 :: Ponto -> Ponto -> Float
+distancia1 (x1, y1, z1) (x2, y2, z2) = sqrt (d1 + d2 + d3)
+    where
+        d1 = (x2-x1)^2
+        d2 = (y2-y1)^2
+        d3 = (z2-z1)^2
+
