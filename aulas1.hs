@@ -6,7 +6,7 @@
 {-# HLINT ignore "Use isAsciiLower" #-}
 {-# HLINT ignore "Use isAsciiUpper" #-}
 
--- Aula 1
+-- Aula 1 Introducao
 polinomio :: Int -> Int
 polinomio x = x * x + 10*x + 2
 
@@ -25,10 +25,10 @@ area a = a * a * pi
 dif :: Float -> Float -> Float
 dif a b = abs (area a - area b)
 ----------------------------------------------------------------------------
--- Aula 2
+-- Aula 2 Condicionais
 maior1 :: Int -> Int -> Int
-maior1 a b = if a > b 
-    then a 
+maior1 a b = if a > b
+    then a
     else b
 
 maior2 :: Int -> Int -> Int -> Int -> Int
@@ -48,7 +48,7 @@ maiorg a b
     | otherwise = 0
 
 isPar :: Int -> Bool
-isPar n 
+isPar n
     | n `mod` 2 == 0 = True
     | otherwise = False
 
@@ -57,7 +57,7 @@ charcase c
     | c >= 'a' && c <= 'z' = "minusculo"
     | c >= 'A' && c <= 'Z' = "maiusculo"
     | otherwise = "nao eh letra"
-    
+
 funcao :: Int -> Int -> Int -> Int
 funcao a b c
     | a == 0 = b^2 + 3*c
@@ -66,16 +66,16 @@ funcao a b c
     | otherwise = 0
 
 ----------------------------------------------------------------------------
--- Aula 3
+-- Aula 3 Definicoes Locais
 areaheron :: Float -> Float -> Float -> Float
 areaheron a b c = sqrt (s*(s-a)*(s-b)*(s-c))
     where s = (a+b+c)/2
 
 funcao1 :: Int -> Int -> Int
-funcao1 x y 
+funcao1 x y
     | x <= 10 = x + a
     | otherwise = x - a
-    where 
+    where
         a = 2*y
 
 funcao2 :: Int -> Int
@@ -87,7 +87,7 @@ funcao2 y = 3 + func y + func a + func b
         c = 10
 
 eq2grau :: Float -> Float -> Float -> Int
-eq2grau a b c 
+eq2grau a b c
     | delta > 0 = 2
     | delta == 0 = 1
     | otherwise = 0
@@ -107,7 +107,7 @@ areaheron2 a b c = let s = (a+b+c)/2
     in sqrt (s*(s-a)*(s-b)*(s-c))
 
 ----------------------------------------------------------------------------
--- Aula 4
+-- Aula 4 Recursao
 divrec :: Int -> Int -> Int
 divrec a b
     | a < b     = a
@@ -146,4 +146,48 @@ fibocauda n acc1 acc2
     | n == 0 = acc1
     | n == 1 = acc2
     | n > 1  = fibocauda (n-1) acc2 (acc1+acc2)
-    
+
+----------------------------------------------------------------------------
+-- Aula 5 Listas
+
+lista = 1 : [1,2,3,4,5,6,7,8,9,10]
+
+comp :: [Int] -> Int
+comp [] = 0
+comp (x:xs) = 1 + comp xs
+
+comp1 :: [Int] -> Int
+comp1 lista
+    | null lista = 0
+    | otherwise = 1 + comp1 (tail lista)
+
+cubo :: Int -> Int
+cubo x = x * x * x
+aoCubo :: [Int] -> [Int]
+aoCubo [] = []
+aoCubo (x:xs) = cubo x : aoCubo xs
+
+somatoria :: [Int] -> Int
+somatoria [] = 0
+somatoria (x:xs) = x + somatoria xs
+
+verifica :: Char -> [Char] -> Bool
+verifica c [] = False
+verifica c (x:xs) 
+    | x == c = True 
+    | otherwise = verifica c xs
+
+maiorv :: [Int] -> Int
+maiorv [] = -1
+maiorv (x:xs)
+    | x >= maiorx = x
+    | otherwise = maiorx
+    where maiorx = maiorv xs
+
+raizes :: Float -> Float -> Float -> [Float]
+raizes a b c 
+    | delta < 0     = []
+    | delta == 0    = [(-b)/(2*a)]
+    | otherwise     = [(-b - sqrt delta)/(2*a), (-b + sqrt delta)/(2*a)]
+    where delta = b*b - 4*a*c 
+
